@@ -63,7 +63,7 @@ def create_app():
     #                                interest_address_bp, mypage_bp, order_bp, \
     #                                partner_bp, point_bp, point_charge_bp, point_withdraw_bp, \
     #                                ad_bp, tax_bp)
-    from vind.controllers import (hello_bp,)
+    from vind.controllers import (hello_bp, intro_bp)
 
     # register blueprints.
     blueprints = [v for k, v in locals().items()

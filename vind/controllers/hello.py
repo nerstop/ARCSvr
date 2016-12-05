@@ -146,3 +146,27 @@ def hello_del(key):
         raise abort(500)
 
     return jsonify({"success": True})
+
+
+@app.route("/hello/get/All/", methods=["GET"])
+def hello_get_all():
+    # print("## print test")
+    hkv = db.query(HelloKv).filter_by(is_valid=True).all()
+
+    # hkv = db.query(HelloKv)
+    # hkv = hkv.filter(or_(HelloKv.key == key, HelloKv.key == 0))
+    # hkv = hkv.filter(HelloKv.idx > 0)
+    # hkv = hkv.group_by(HelloKv.key)
+    # hkv = hkv.order_by(HelloKv.idx.desc())
+    # hkv = hkv.all()
+
+    # where key=key or key1=key1
+
+    # value = pz(hkv.value) if hkv else None
+    # return jsonify({"orders": [o.serialize(exclude=["idx_key"]) for o in orders]}), 200
+    return jsonify({"result" : [{"key" : i.key , "value" : pz(i.value)} for i in hkv] }), 200
+
+# map(lamda) 사용 법
+# [ i for i in some_list ] 란 배열의 값들을 다 곱하기 2 하고 싶다
+# [ i*2 for i in some_list ] 보다
+# map(lambda x: x*2, some_list) 이게 속도가 더 빠르다.
